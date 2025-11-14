@@ -1,5 +1,6 @@
 import { QuartzComponent, QuartzComponentProps } from "./types"
 import RecentNotes from "./RecentNotes"
+import { SimpleSlug } from "../util/path"
 
 const RecentNotesForIndex: QuartzComponent = (props: QuartzComponentProps) => {
   if (props.fileData.slug === "index") {
@@ -7,7 +8,7 @@ const RecentNotesForIndex: QuartzComponent = (props: QuartzComponentProps) => {
       title: "Recent Posts",
       limit: 5,
       showTags: true,
-      linkToMore: "/all-posts",
+      linkToMore: "all-posts" as SimpleSlug,
     })(props)
   }
   return null
