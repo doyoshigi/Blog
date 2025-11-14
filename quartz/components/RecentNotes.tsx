@@ -3,7 +3,8 @@ import { FullSlug, SimpleSlug, resolveRelative } from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
 import { byDateAndAlphabetical } from "./PageList"
 import style from "./styles/recentNotes.scss"
-import { Date, getDate } from "./Date"
+// import { Date, getDate } from "./Date"
+import { Date } from "./Date"
 import { GlobalConfiguration } from "../cfg"
 import { i18n } from "../i18n"
 import { classNames } from "../util/lang"
@@ -22,7 +23,19 @@ const defaultOptions = (cfg: GlobalConfiguration): Options => ({
   linkToMore: false,
   showTags: true,
   filter: () => true,
-  sort: byDateAndAlphabetical(cfg),
+  // sort: byDateAndAlphabetical(cfg),
+  sort: (f1: QuartzPluginData, f2: QuartzPluginData): number => {
+    const d1 = f1.dates?.created?.getTime() ?? 0
+    const d2 = f2.dates?.created?.getTime() ?? 0
+
+    if (d2 !== d1) {
+      return d2 - d1
+    }
+
+    const t1 = f1.frontmatter?.title ?? f1.slug ?? ""
+    const t2 = f2.frontmatter?.title ?? f2.slug ?? ""
+    return t1.localeCompare(t2)
+  },
 })
 
 export default ((userOpts?: Partial<Options>) => {
