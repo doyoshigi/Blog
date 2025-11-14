@@ -112,7 +112,7 @@ import { classNames } from "../util/lang"
 
 // 1. FolderContent가 사용하는 PageList와 스타일을 가져옵니다.
 import { PageList, SortFn } from "./PageList"
-import style from "../styles/listPage.scss" // recentNotes.scss 대신 listPage.scss 사용
+import style from "./styles/listPage.scss" // recentNotes.scss 대신 listPage.scss 사용
 
 // 2. PageList의 CSS를 병합하기 위해 concatenateResources를 가져옵니다.
 import { concatenateResources } from "../util/resources"
@@ -175,8 +175,7 @@ export default ((userOpts?: Partial<Options>) => {
                        {" "}
             <a href={resolveRelative(fileData.slug!, opts.linkToMore)}>
                            {" "}
-              {i18n(cfg.locale).components.recentNotes.seeRemainingMore({ remaining })}         
-               {" "}
+              {i18n(cfg.locale).components.recentNotes.seeRemainingMore({ remaining })} {" "}
             </a>
                      {" "}
           </p>
