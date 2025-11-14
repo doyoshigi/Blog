@@ -48,6 +48,9 @@ export interface Translation {
       title: string
       seeRemainingMore: (variables: { remaining: number }) => string
     }
+    allPosts?: {
+      title: string
+    }
     transcludes: {
       transcludeOf: (variables: { targetSlug: FullSlug }) => string
       linkToOriginal: string
