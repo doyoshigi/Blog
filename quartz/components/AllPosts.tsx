@@ -1,9 +1,7 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
-import style from "../styles/listPage.scss"
 import { PageList } from "./PageList"
 import { Root } from "hast"
 import { htmlToJsx } from "../util/jsx"
-// import { i18n } from "../i18n" // 👈 1. i18n을 사용하지 않으므로 이 줄을 삭제하거나 주석 처리합니다.
 import { ComponentChildren } from "preact"
 import { concatenateResources } from "../util/resources"
 import RecentNotes from "./RecentNotes" // 👈 PageList 대신 RecentNotes를 가져옵니다.
@@ -71,6 +69,7 @@ export default ((opts?: Partial<AllPostsOptions>) => {
   }
 
   // 8. CSS 설정 (FolderContent와 동일하게 PageList의 CSS를 사용)
-  AllPosts.css = concatenateResources(style, PageList.css)
+  // AllPosts.css = concatenateResources(style, PageList.css)
+  AllPosts.css = PageList.css
   return AllPosts
 }) satisfies QuartzComponentConstructor
