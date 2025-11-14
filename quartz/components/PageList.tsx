@@ -8,15 +8,20 @@ export type SortFn = (f1: QuartzPluginData, f2: QuartzPluginData) => number
 
 export function byDateAndAlphabetical(cfg: GlobalConfiguration): SortFn {
   return (f1, f2) => {
-    // Sort by date/alphabetical
-    if (f1.dates && f2.dates) {
-      // sort descending
-      return getDate(cfg, f2)!.getTime() - getDate(cfg, f1)!.getTime()
-    } else if (f1.dates && !f2.dates) {
-      // prioritize files with dates
-      return -1
-    } else if (!f1.dates && f2.dates) {
-      return 1
+    // // Sort by date/alphabetical
+    // if (f1.dates && f2.dates) {
+    //   // sort descending
+    //   return getDate(cfg, f2)!.getTime() - getDate(cfg, f1)!.getTime()
+    // } else if (f1.dates && !f2.dates) {
+    //   // prioritize files with dates
+    //   return -1
+    // } else if (!f1.dates && f2.dates) {
+    //   return 1
+    // }
+    const d1 = f1.dates?.created?.getTime() ?? 0
+    const d2 = f2.dates?.created?.getTime() ?? 0
+    if (d2 !== d1) {
+      return d2 - d1
     }
 
     // otherwise, sort lexographically by title
@@ -35,14 +40,19 @@ export function byDateAndAlphabeticalFolderFirst(cfg: GlobalConfiguration): Sort
     if (!f1IsFolder && f2IsFolder) return 1
 
     // If both are folders or both are files, sort by date/alphabetical
-    if (f1.dates && f2.dates) {
-      // sort descending
-      return getDate(cfg, f2)!.getTime() - getDate(cfg, f1)!.getTime()
-    } else if (f1.dates && !f2.dates) {
-      // prioritize files with dates
-      return -1
-    } else if (!f1.dates && f2.dates) {
-      return 1
+    // if (f1.dates && f2.dates) {
+    //   // sort descending
+    //   return getDate(cfg, f2)!.getTime() - getDate(cfg, f1)!.getTime()
+    // } else if (f1.dates && !f2.dates) {
+    //   // prioritize files with dates
+    //   return -1
+    // } else if (!f1.dates && f2.dates) {
+    //   return 1
+    // }
+    const d1 = f1.dates?.created?.getTime() ?? 0
+    const d2 = f2.dates?.created?.getTime() ?? 0
+    if (d2 !== d1) {
+      return d2 - d1
     }
 
     // otherwise, sort lexographically by title
