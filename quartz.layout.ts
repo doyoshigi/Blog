@@ -15,7 +15,7 @@ export const sharedPageComponents: SharedLayout = {
 }
 
 import RecentNotesForIndex from "./quartz/components/RecentNotesForIndex"
-import AllPosts from "./quartz/components/AllPosts"
+import AllRecentNotes from "./quartz/components/AllRecentNotes"
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
@@ -27,7 +27,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ContentMeta(),
     Component.TagList(),
   ],
-  afterBody: [RecentNotesForIndex, AllPosts],
+  afterBody: [RecentNotesForIndex, AllRecentNotes],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
