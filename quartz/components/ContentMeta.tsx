@@ -38,9 +38,9 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
               📄 created: <Date date={dates.created} locale={cfg.locale} />
             </span>,
           )
-        } // Modified 날짜 표시 (created와 다를 경우에만)
+        }
 
-        if (dates.modified && dates.created?.getTime() !== dates.modified?.getTime()) {
+        if (dates.modified) {
           segments.push(
             <span class="modified">
               📝 modified: <Date date={dates.modified} locale={cfg.locale} />
@@ -48,9 +48,6 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
           )
         }
       }
-      // if (fileData.dates) {
-      //   segments.push(<Date date={getDate(cfg, fileData)!} locale={cfg.locale} />)
-      // }
 
       // Display reading time if enabled
       if (options.showReadingTime) {
