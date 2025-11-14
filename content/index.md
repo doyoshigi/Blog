@@ -1,6 +1,10 @@
 ---
-title: Welcome to Quartz
+title: doyoshigi's Blog
+created: 2025-11-14
+modified: 2025-11-14
 ---
+**공부한 것을 기록합니다.**
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+## Link
+- [TIL](https://doyoshigi.github.io/TIL/)
+- [Github](https://github.com/doyoshigi)
