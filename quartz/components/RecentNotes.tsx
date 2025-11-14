@@ -53,9 +53,10 @@ export default ((userOpts?: Partial<Options>) => {
                       </a>
                     </h3>
                   </div>
-                  {page.dates && (
+                  {page.dates && page.dates.created && (
                     <p class="meta">
-                      <Date date={getDate(cfg, page)!} locale={cfg.locale} />
+                      {/* <Date date={getDate(cfg, page)!} locale={cfg.locale} /> */}
+                      <Date date={page.dates.created} locale={cfg.locale} />
                     </p>
                   )}
                   {opts.showTags && (
