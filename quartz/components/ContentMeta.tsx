@@ -29,10 +29,28 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
 
     if (text && slug !== "index" && slug !== "all-posts") {
       const segments: (string | JSX.Element)[] = []
+      const { dates } = fileData
 
-      if (fileData.dates) {
-        segments.push(<Date date={getDate(cfg, fileData)!} locale={cfg.locale} />)
+      if (dates) {
+        if (dates.created) {
+          segments.push(
+            <span class="created">
+              📄 created: <Date date={dates.created} locale={cfg.locale} />
+            </span>,
+          )
+        } // Modified 날짜 표시 (created와 다를 경우에만)
+
+        if (dates.modified && dates.created?.getTime() !== dates.modified?.getTime()) {
+          segments.push(
+            <span class="modified">
+              📝 modified: <Date date={dates.modified} locale={cfg.locale} />
+            </span>,
+          )
+        }
       }
+      // if (fileData.dates) {
+      //   segments.push(<Date date={getDate(cfg, fileData)!} locale={cfg.locale} />)
+      // }
 
       // Display reading time if enabled
       if (options.showReadingTime) {
