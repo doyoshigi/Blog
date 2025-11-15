@@ -7,17 +7,7 @@ import { isFolderPath, FullSlug } from "./quartz/util/path"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [
-    Component.Comments({
-      provider: "giscus",
-      options: {
-        repo: "doyoshigi/Blog",
-        repoId: "R_kgDOQVdHGw",
-        category: "Announcements",
-        categoryId: "DIC_kwDOQVdHG84Cx0Ix",
-      },
-    }),
-  ],
+  afterBody: [],
   footer: Component.Footer({
     links: {
       // GitHub: "https://github.com/jackyzha0/quartz",
@@ -40,7 +30,41 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ContentMeta(),
     Component.TagList(),
   ],
-  afterBody: [RecentNotesForIndex, AllRecentNotes],
+  afterBody: [
+    RecentNotesForIndex, // 기존 컴포넌트 유지
+    AllRecentNotes, // 기존 컴포넌트 유지
+    // 3. 여기에 ConditionalRender와 Giscus를 추가합니다.
+    Component.ConditionalRender({
+      component: Component.Comments({
+        provider: "giscus",
+        options: {
+          repo: "doyoshigi/Blog",
+          repoId: "R_kgDOQVdHGw",
+          category: "Announcements",
+          categoryId: "DIC_kwDOQVdHG84Cx0Ix",
+          // 테마나 언어를 강제하고 싶다면 여기에 추가
+          // theme: "dark",
+          // lang: "ko",
+        },
+      }),
+      // 4. 'index', 'all-posts', '404', '폴더' 페이지에서 숨기는 조건
+      condition: (page) => {
+        const slug = page.fileData.slug
+        if (!slug) {
+          return false
+        }
+
+        // 이 레이아웃은 'list' 페이지(폴더)에는 적용되지 않으므로
+        // isFolderPath 검사는 사실상 필요 없지만, 명시적으로 남겨둡니다.
+        const isFolder = isFolderPath(slug as FullSlug)
+        const isIndex = slug === "index"
+        const isAllPosts = slug === "all-posts"
+        const is404 = slug === "404"
+
+        return !isFolder && !isIndex && !isAllPosts && !is404
+      },
+    }),
+  ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
