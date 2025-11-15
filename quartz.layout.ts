@@ -60,23 +60,6 @@ export const defaultContentPageLayout: PageLayout = {
         return !isIndex && !isAllPosts && !is404
       },
     }),
-    // Component.Comments({
-    //   provider: "giscus",
-    //   options: {
-    //     repo: "doyoshigi/Blog",
-    //     repoId: "R_kgDOQVdHGw",
-    //     category: "Announcements",
-    //     categoryId: "DIC_kwDOQVdHG84Cx0Ix",
-    //     mapping: "pathname",
-    //     strict: "0",
-    //     reactionsEnabled: "1",
-    //     emitMetadata: "0",
-    //     inputPosition: "bottom",
-    //     theme: "preferred_color_scheme",
-    //     lang: "ko",
-    //     crossorigin: "anonymous",
-    //   },
-    // }),
   ],
   left: [
     Component.PageTitle(),
