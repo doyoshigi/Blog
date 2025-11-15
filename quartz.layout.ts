@@ -8,24 +8,6 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
-    // Component.ConditionalRender({
-    //   component: Giscus(),
-    //   condition: (page) => {
-    //     const slug = page.fileData.slug
-
-    //     if (!slug) {
-    //       return false
-    //     }
-
-    //     const isFolder = isFolderPath(slug)
-
-    //     const isIndex = slug === "index"
-    //     const isAllPosts = slug === "all-posts"
-    //     const is404 = slug === "404"
-
-    //     return !isFolder && !isIndex && !isAllPosts && !is404
-    //   },
-    // }),
     Component.Comments({
       provider: "giscus",
       options: {
@@ -34,9 +16,9 @@ export const sharedPageComponents: SharedLayout = {
         // data-repo-id
         repoId: "R_kgDOQVdHGw",
         // data-category
-        category: "General",
+        category: "Announcements",
         // data-category-id
-        categoryId: "DIC_kwDOQVdHG84Cx0Iy",
+        categoryId: "DIC_kwDOQVdHG84Cx0Ix",
       },
     }),
   ],
