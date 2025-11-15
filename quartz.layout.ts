@@ -16,9 +16,8 @@ export const sharedPageComponents: SharedLayout = {
         // 3. 'all-posts' 페이지가 아닐 때
         // ( 'single' 조건은 'list' 페이지와 '404' 페이지를 자동으로 제외합니다 )
         return (
-          page.fileData.kind === "single" &&
-          page.fileData.slug !== "index" &&
-          page.fileData.slug !== "all-posts"
+          // page.fileData.kind === "single" &&
+          page.fileData.slug !== "index" && page.fileData.slug !== "all-posts"
         )
       },
     }),
