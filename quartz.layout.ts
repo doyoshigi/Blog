@@ -8,41 +8,13 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
-    // [1] Giscus를 ConditionalRender로 감쌉니다.
-    Component.ConditionalRender({
-      // [2] 렌더링할 컴포넌트는 Comments입니다.
-      component: Component.Comments({
-        provider: "giscus",
-        // [3] 사용자가 제공한 <script>의 모든 옵션을 여기에 전달합니다.
-        options: {
-          repo: "doyoshigi/Blog",
-          repoId: "R_kgDOQVdHGw",
-          category: "Announcements",
-          categoryId: "DIC_kwDOQVdHG84Cx0Ix",
-          mapping: "pathname",
-          strict: "0",
-          reactionsEnabled: "1",
-          emitMetadata: "0",
-          inputPosition: "bottom",
-          theme: "dark", // 👈 'dark' 테마를 지정했습니다.
-          lang: "ko",
-          crossorigin: "anonymous", // 👈 이 옵션도 추가
-        },
-      }),
-      // [4] 이전에 완성했던 'slug' 기반의 조건부 로직을 사용합니다.
-      condition: (page) => {
-        const slug = page.fileData.slug
-        if (!slug) {
-          return false
-        }
-
-        const isFolder = isFolderPath(slug as FullSlug)
-        const isIndex = slug === "index"
-        const isAllPosts = slug === "all-posts"
-        const is404 = slug === "404"
-
-        // 폴더/인덱스/all-posts/404가 아닐 때만 Giscus를 표시합니다.
-        return !isFolder && !isIndex && !isAllPosts && !is404
+    Component.Comments({
+      provider: "giscus",
+      options: {
+        repo: "doyoshigi/Blog",
+        repoId: "R_kgDOQVdHGw",
+        category: "Announcements",
+        categoryId: "DIC_kwDOQVdHG84Cx0Ix",
       },
     }),
   ],
