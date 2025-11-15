@@ -1,6 +1,5 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import Giscus from "./quartz/components/Giscus"
 import { isFolderPath, FullSlug } from "./quartz/util/path"
 
 // components shared across all pages
@@ -31,25 +30,53 @@ export const defaultContentPageLayout: PageLayout = {
     Component.TagList(),
   ],
   afterBody: [
-    RecentNotesForIndex, // 기존 컴포넌트 유지
-    AllRecentNotes, // 기존 컴포넌트 유지
-    Component.Comments({
-      provider: "giscus",
-      options: {
-        repo: "doyoshigi/Blog",
-        repoId: "R_kgDOQVdHGw",
-        category: "Announcements",
-        categoryId: "DIC_kwDOQVdHG84Cx0Ix",
-        mapping: "pathname",
-        strict: "0", // 👈 404 오류의 원인
-        reactionsEnabled: "1",
-        emitMetadata: "0",
-        inputPosition: "bottom",
-        theme: "preferred_color_scheme", // 👈 테마 문제의 원인
-        lang: "ko", // 👈 언어 문제
-        crossorigin: "anonymous",
+    RecentNotesForIndex,
+    AllRecentNotes,
+    Component.ConditionalRender({
+      component: Component.Comments({
+        provider: "giscus",
+        options: {
+          repo: "doyoshigi/Blog",
+          repoId: "R_kgDOQVdHGw",
+          category: "Announcements",
+          categoryId: "DIC_kwDOQVdHG84Cx0Ix",
+          mapping: "pathname",
+          strict: "0",
+          reactionsEnabled: "1",
+          emitMetadata: "0",
+          inputPosition: "bottom",
+          theme: "preferred_color_scheme",
+          lang: "ko",
+          crossorigin: "anonymous",
+        },
+      }),
+      condition: (page) => {
+        const slug = page.fileData.slug
+
+        const isIndex = slug === "index"
+        const isAllPosts = slug === "all-posts"
+        const is404 = slug === "404"
+
+        return !isIndex && !isAllPosts && !is404
       },
     }),
+    // Component.Comments({
+    //   provider: "giscus",
+    //   options: {
+    //     repo: "doyoshigi/Blog",
+    //     repoId: "R_kgDOQVdHGw",
+    //     category: "Announcements",
+    //     categoryId: "DIC_kwDOQVdHG84Cx0Ix",
+    //     mapping: "pathname",
+    //     strict: "0",
+    //     reactionsEnabled: "1",
+    //     emitMetadata: "0",
+    //     inputPosition: "bottom",
+    //     theme: "preferred_color_scheme",
+    //     lang: "ko",
+    //     crossorigin: "anonymous",
+    //   },
+    // }),
   ],
   left: [
     Component.PageTitle(),
