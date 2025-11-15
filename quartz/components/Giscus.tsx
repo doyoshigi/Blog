@@ -5,7 +5,6 @@ function GiscusComponent(props: QuartzComponentProps): VNode | null {
   return (
     <script
       src="https://giscus.app/client.js"
-      key="giscus-script"
       data-repo="doyoshigi/Blog"
       data-repo-id="R_kgDOQVdHGw"
       data-category="General"
@@ -17,7 +16,7 @@ function GiscusComponent(props: QuartzComponentProps): VNode | null {
       data-input-position="bottom"
       data-theme="dark"
       data-lang="ko"
-      crossOrigin="anonymous"
+      crossorigin="anonymous"
       async
     ></script>
   )

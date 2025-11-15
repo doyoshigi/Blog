@@ -17,7 +17,7 @@ export const sharedPageComponents: SharedLayout = {
           return false
         }
 
-        const isFolder = isFolderPath(slug as "")
+        const isFolder = isFolderPath(slug)
 
         const isIndex = slug === "index"
         const isAllPosts = slug === "all-posts"
