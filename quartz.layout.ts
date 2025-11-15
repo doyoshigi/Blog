@@ -40,6 +40,14 @@ export const defaultContentPageLayout: PageLayout = {
         repoId: "R_kgDOQVdHGw",
         category: "Announcements",
         categoryId: "DIC_kwDOQVdHG84Cx0Ix",
+        mapping: "pathname",
+        strict: "0", // 👈 404 오류의 원인
+        reactionsEnabled: "1",
+        emitMetadata: "0",
+        inputPosition: "bottom",
+        theme: "preferred_color_scheme", // 👈 테마 문제의 원인
+        lang: "ko", // 👈 언어 문제
+        crossorigin: "anonymous",
       },
     }),
   ],
