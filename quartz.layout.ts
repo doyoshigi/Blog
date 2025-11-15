@@ -1,6 +1,7 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 import Giscus from "./quartz/components/Giscus"
+import { isFolderPath, FullSlug } from "./quartz/util/path"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -10,15 +11,19 @@ export const sharedPageComponents: SharedLayout = {
     Component.ConditionalRender({
       component: Giscus(),
       condition: (page) => {
-        // Giscus를 표시할 조건 (true일 때 표시됨)
-        // 1. 'single' 페이지(일반 노트)일 때만 표시
-        // 2. 'index' 페이지가 아닐 때
-        // 3. 'all-posts' 페이지가 아닐 때
-        // ( 'single' 조건은 'list' 페이지와 '404' 페이지를 자동으로 제외합니다 )
-        return (
-          // page.fileData.kind === "single" &&
-          page.fileData.slug !== "index" && page.fileData.slug !== "all-posts"
-        )
+        const slug = page.fileData.slug
+
+        if (!slug) {
+          return false
+        }
+
+        const isFolder = isFolderPath(slug as FullSlug)
+
+        const isIndex = slug === "index"
+        const isAllPosts = slug === "all-posts"
+        const is404 = slug === "404"
+
+        return !isFolder && !isIndex && !isAllPosts && !is404
       },
     }),
   ],
