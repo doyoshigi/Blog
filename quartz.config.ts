@@ -13,10 +13,11 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "plausible",
+      provider: "google",
+      tagId: "G-T5R323B4TB",
     },
     locale: "ko-KR",
-    baseUrl: "Blog",
+    baseUrl: "doyoshigi.github.io/Blog/",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {

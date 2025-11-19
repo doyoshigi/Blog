@@ -1,8 +1,14 @@
 ---
-description: Example
+description:
 tags:
-  - example-tag
-date: 2020-11-11
-modified: 2025-11-14
+date:
+modified:
 draft: true
+stage:
+  - 초안
+  - 1차 퇴고
+  - 2차 퇴고
+  - 3차 퇴고
+  - 4차 퇴고
+  - 블로그 업로드
 ---
