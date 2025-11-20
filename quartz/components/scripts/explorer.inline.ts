@@ -95,6 +95,18 @@ function createFileNode(currentSlug: FullSlug, node: FileTrieNode): HTMLLIElemen
   return li
 }
 
+function getFileCount(node: FileTrieNode): number {
+  let count = 0
+  for (const child of node.children) {
+    if (!child.isFolder) {
+      count += 1
+    } else {
+      count += getFileCount(child)
+    }
+  }
+  return count
+}
+
 function createFolderNode(
   currentSlug: FullSlug,
   node: FileTrieNode,
@@ -111,18 +123,49 @@ function createFolderNode(
   const folderPath = node.slug
   folderContainer.dataset.folderpath = folderPath
 
+  // if (opts.folderClickBehavior === "link") {
+  //   // Replace button with link for link behavior
+  //   const button = titleContainer.querySelector(".folder-button") as HTMLElement
+  //   const a = document.createElement("a")
+  //   a.href = resolveRelative(currentSlug, folderPath)
+  //   a.dataset.for = folderPath
+  //   a.className = "folder-title"
+  //   a.textContent = node.displayName
+  //   button.replaceWith(a)
+  // } else {
+  //   const span = titleContainer.querySelector(".folder-title") as HTMLElement
+  //   span.textContent = node.displayName
+  // }
+
+  const fileCount = getFileCount(node)
+  const countText = fileCount > 0 ? ` (${fileCount})` : ""
+
   if (opts.folderClickBehavior === "link") {
-    // Replace button with link for link behavior
     const button = titleContainer.querySelector(".folder-button") as HTMLElement
     const a = document.createElement("a")
     a.href = resolveRelative(currentSlug, folderPath)
     a.dataset.for = folderPath
     a.className = "folder-title"
+
     a.textContent = node.displayName
+    if (fileCount > 0) {
+      const countSpan = document.createElement("span")
+      countSpan.classList.add("folder-count")
+      countSpan.textContent = countText
+      a.appendChild(countSpan)
+    }
+
     button.replaceWith(a)
   } else {
     const span = titleContainer.querySelector(".folder-title") as HTMLElement
     span.textContent = node.displayName
+
+    if (fileCount > 0) {
+      const countSpan = document.createElement("span")
+      countSpan.classList.add("folder-count")
+      countSpan.textContent = countText
+      span.insertAdjacentElement("afterend", countSpan)
+    }
   }
 
   // if the saved state is collapsed or the default state is collapsed
