@@ -6,8 +6,6 @@ tags:
 date: 2025-11-17
 modified: 2025-11-17
 draft: true
-stage:
-  - 1차 퇴고
 ---
 인프라를 물리적으로 관리하는 대신 AWS에서는 API를 통해 논리적으로 관리한다. 따라서 AWS에서 수행하는 모든 작업은 인증 및 권한이 부여된 API를 직접 호출한다.
 AWS에서는 AWS Management Console, AWS Command Line Interface(AWS CLI) 또는 AWS SDK를 통해서 서비스 및 리소스에 대한 API 호출을 수행할 수 있다.
