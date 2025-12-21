@@ -3,7 +3,7 @@ description: AWS Organizations
 tags:
   - AWS
 date: 2025-12-13
-modified: 2025-12-13
+modified: 2025-12-21
 draft: false
 ---
 ## AWS Organizations란?
@@ -22,7 +22,6 @@ AWS Organizations에서 AWS 계정을 생성하거나 기존의 AWS 계정을 �
 OU나 AWS 계정에는 여러가지 정책을 설정할 수 있는데 루트나 OU에 연결된 정책은 해당 지점 아래의 모든 하위 OU와 게정에 적용됩니다.
 
 이 글에서는 여러 정책 중 SCP(Service Control Policy)와 RCP(Resource Control Policy)를 알아보도록 하겠다.
-
 ### SCP(Service Control Policy) 
 SCP는 AWS 계정의 IAM 사용자/역할이 행사할 수 있는 최대 권한을 설정한다. SCP는 권한을 부여하지 않으며, 단지 가능한 것을 제한할 뿐이다. IAM 또는 Identify Center 권한 세트가 어떤 작업을 허용 하더라도, SCP의 명시적 거부가 이를 우선한다.
 
@@ -32,6 +31,9 @@ RCP는 조직 계정의 리소스에 액세스할 수 있는 방식에 대한 �
 SCP와 RCP의 경계를 다시 정리하면 아래와 같다.
 - **SCP = 보안 주체(Identity) 측 경계 (IAM 보안 주체)**
 - **RCP = 리소스 측 경계 (리소스 액세스, 특히 조직 외부로부터의 액세스)**
+
+### 가드레일(Guardrail)
+가드레일은 문장으로 정의한 개념적인 정책(규칙)이고 실제로 그것을 구현하는 것이 SCP나 RCP 등의 정책이다.
 
 ## 통합 결제(Consolidated billing)
 ![[Pasted image 20251214000518.png]]
